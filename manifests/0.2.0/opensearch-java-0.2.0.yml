@@ -1,0 +1,12 @@
+---
+schema-version: "1.0"
+build:
+  name: opensearch-java
+  version: 0.2.0
+components:
+  - name: opensearch-java
+    repository: https://github.com/opensearch-project/opensearch-java.git
+    ref: "main"
+    checks:
+      - gradle:publish
+      - gradle:properties:version
