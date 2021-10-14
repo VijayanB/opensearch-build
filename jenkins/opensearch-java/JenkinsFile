@@ -6,7 +6,7 @@ pipeline {
     }
     environment {
         ARTIFACT_PATH = "~/.m2/repository/org/opensearch/client/${params.VERSION}/"
-        VERSION = ${params.VERSION}
+        VERSION = "${params.VERSION}"
     }
     stages {
         stage('parameters') {
