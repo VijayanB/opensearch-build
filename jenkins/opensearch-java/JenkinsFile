@@ -40,7 +40,7 @@ pipeline {
                 sh('git checkout ${COMMIT_ID}')
 
                 //publish to maven local
-                sh('echo $WORKSPACE')
+                sh('echo $WORKSPACE && ls -l')
                 sh('./gradlew publishtoMavenLocal')
                 sh('ls -l ${ARTIFACT_PATH}')
             }
