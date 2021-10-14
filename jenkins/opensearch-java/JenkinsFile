@@ -6,6 +6,7 @@ pipeline {
     }
     environment {
         ARTIFACT_PATH = "~/.m2/repository/org/opensearch/client/${params.VERSION}/"
+        VERSION = ${params.VERSION}
     }
     stages {
         stage('parameters') {
@@ -33,10 +34,11 @@ pipeline {
                 git url: 'https://github.com/opensearch-project/opensearch-java.git', branch: ${params.COMMIT_ID}
 
                 //publish to maven local
-                sh(' cd $WORKSPACE && ./gradlew publishtoMavenLocal')
+                sh('./gradlew publishtoMavenLocal')
                 sh('ls -l ${ARTIFACT_PATH}')
             }
         }
+    }
 //         stage('sign') {
 //             environment {
 //               // These ENV variables are required by https://github.com/opensearch-project/opensearch-signer-client
@@ -84,4 +86,4 @@ pipeline {
 //             }
 //         }
 //     }
-}
+// }
