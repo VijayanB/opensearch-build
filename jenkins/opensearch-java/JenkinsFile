@@ -31,7 +31,7 @@ pipeline {
         stage('publish to maven local') {
             steps {
                 // checkout the commit
-                git url: 'https://github.com/opensearch-project/opensearch-java.git', branch: ${params.COMMIT_ID}
+                git url: 'https://github.com/opensearch-project/opensearch-java.git', branch: "${params.COMMIT_ID}"
 
                 //publish to maven local
                 sh('./gradlew publishtoMavenLocal')
