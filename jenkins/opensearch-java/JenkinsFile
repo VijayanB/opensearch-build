@@ -10,7 +10,7 @@ pipeline {
             }
     }
     environment {
-        ARTIFACT_PATH = "~/.m2/repository/org/opensearch/client/${params.VERSION}/"
+        ARTIFACT_PATH = "~/.m2/repository/org/opensearch/client/opensearch-java/${params.VERSION}/"
         VERSION = "${params.VERSION}"
     }
     stages {
@@ -36,7 +36,7 @@ pipeline {
         stage('publish to maven local') {
             steps {
                 // checkout the commit
-                git url: 'https://github.com/opensearch-project/opensearch-java.git', branch: 'main'
+                git url: 'https://github.com/VijayanB/opensearch-java.git', branch: 'replace-non-unicode'
                 sh('git checkout ${COMMIT_ID}')
 
                 //publish to maven local
