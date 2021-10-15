@@ -36,7 +36,7 @@ pipeline {
         stage('publish to maven local') {
             steps {
                 // checkout the commit
-                git url: 'https://github.com/opensearch-project/opensearch-java.git', branch: 'main'
+                git url: 'https://github.com/gaiksaya/opensearch-java.git', branch: 'main'
                 sh('git checkout ${COMMIT_ID}')
 
                 //publish to maven local
