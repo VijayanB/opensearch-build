@@ -41,7 +41,7 @@ pipeline {
 
                 //publish to maven local
                 sh('echo $WORKSPACE && ls -l')
-                sh('export GRADLE_OPTS="-Dfile.encoding=utf-8"')
+                sh('export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8')
                 sh('./gradlew publishtoMavenLocal')
                 sh('ls -l ${ARTIFACT_PATH}')
             }
