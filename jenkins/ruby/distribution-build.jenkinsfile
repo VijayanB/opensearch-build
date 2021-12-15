@@ -35,13 +35,11 @@ pipeline {
             }
             steps {
                 script {
-                    git url: "https://github.com/opensearch-project/$REPOSITORY.git", branch: "$RELEASE_BRANCH"
+                    git url: " https://github.com/VijayanB/logstash-output-opensearch.git", branch: "update-build"
                     withCredentials([string(credentialsId: 'opensearchproject-rubygems-private-key', variable: 'RUBYGEMS_PRIVATE_KEY')]) {
                         writeFile file: 'gem-private_key.pem', text: RUBYGEMS_PRIVATE_KEY
                     }
                     sh'''
-                        rvm install $RUBY_INTERPRETER
-                        rvm --default use $RUBY_INTERPRETER
                         gem cert --add certs/opensearch-rubygems.pem
                         ./build.sh
                     '''
@@ -70,14 +68,6 @@ pipeline {
             node('Jenkins-Agent-al2-x64-c54xlarge-Docker-Host') {
                 script {
                     def stashed = lib.jenkins.Messages.new(this).get(['ruby-build-sign-upload'])
-
-                    publishNotification(
-                        icon: ':white_check_mark:',
-                        message: 'Successful Build',
-                        credentialsId: 'BUILD_NOTICE_WEBHOOK',
-                        extra: stashed,
-                    )
-
                     postCleanup()
                 }
             }
@@ -85,12 +75,6 @@ pipeline {
         failure {
             node('Jenkins-Agent-al2-x64-c54xlarge-Docker-Host') {
                 script {
-                    publishNotification(
-                        icon: ':warning:',
-                        message: 'Failed Build',
-                        credentialsId: 'BUILD_NOTICE_WEBHOOK',
-                    )
-
                     postCleanup()
                 }
             }
